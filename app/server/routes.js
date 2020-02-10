@@ -12,7 +12,7 @@ module.exports = function(app) {
 	app.get('/', function(req, res){
 	// check if the user has an auto login key saved in a cookie //
 		if (req.cookies.login == undefined){
-			res.render('login', { title: 'Hello - Please Login To Your Account' });
+			res.render('login', { title: 'Hello - Please login.' });
 		}	else{
 	// attempt automatic login //
 			AM.validateLoginKey(req.cookies.login, req.ip, function(e, o){
@@ -22,7 +22,7 @@ module.exports = function(app) {
 						res.redirect('/home');
 					});
 				}	else{
-					res.render('login', { title: 'Hello - Please Login To Your Account' });
+					res.render('login', { title: 'Hello - Please login.' });
 				}
 			});
 		}
@@ -79,6 +79,7 @@ module.exports = function(app) {
 				country	: req.body['country']
 			}, function(e, o){
 				if (e){
+					console.log("Error updating account" , e);
 					res.status(400).send('error-updating-account');
 				}	else{
 					req.session.user = o.value;
@@ -92,11 +93,11 @@ module.exports = function(app) {
 	new accounts
 */
 
-	app.get('/signup', function(req, res) {
+	app.get('/new-signup', function(req, res) {
 		res.render('signup', {  title: 'Signup', countries : CT });
 	});
 	
-	app.post('/signup', function(req, res){
+	app.post('/new-signup', function(req, res){
 		AM.addNewAccount({
 			name 	: req.body['name'],
 			email 	: req.body['email'],

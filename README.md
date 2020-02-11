@@ -6,6 +6,7 @@
 
 Node Based
 
+* Some notes
 * New User Account Creation
 * Secure Password Reset via Email
 * Ability to Update / Delete Account
